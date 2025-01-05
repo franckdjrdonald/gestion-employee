@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -17,12 +18,6 @@ public class EmployeeController {
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
-    }
-
-    @GetMapping
-    public String listEmployees(Model model) {
-        model.addAttribute("employees", employeeService.findAll());
-        return "employees/list";
     }
 
     @GetMapping("/employees/create")
@@ -51,17 +46,14 @@ public class EmployeeController {
         return "redirect:/employees";
     }
 
-    // Afficher le formulaire de modification
+    //Afficher la page de modification
     @GetMapping("/employees/update/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
-        // Récupérer l'employé par ID
-        Optional<Employee> employee = employeeService.findById(id);
-        if (employee.isEmpty()) {
-            throw new IllegalArgumentException("Employé avec l'ID " + id + " introuvable.");
-        }
+        Employee employee = employeeService.findById(id).get();
         model.addAttribute("employee", employee);
         return "employees/update";
     }
+    //Enregistrer les modifications apportees
     @PostMapping("/employees/saveUpdate")
     public String updateEmployee(@Valid @ModelAttribute("employee") Employee employee,
                                BindingResult result,
@@ -82,14 +74,22 @@ public class EmployeeController {
         return "redirect:/employees";
     }
 
+    // Afficher la liste des employés
+    @GetMapping("/list")
+    public String listEmployees(Model model) {
+        List<Employee> employees = employeeService.findAll();
+        model.addAttribute("employees", employees);
+        return "employee/list";
+    }
+
     @GetMapping("/delete/{id}")
     public String showDeleteConfirmation(@PathVariable Long id, Model model) {
-        Employee employee = employeeService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid employees ID: " + id));
+        Employee employee = employeeService.findById(id).get();
         model.addAttribute("employee", employee);
         return "employees/delete";
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/confirmDelete/{id}")
     public String deleteEmployee(@RequestParam Long id) {
         employeeService.deleteById(id);
         return "redirect:/employees";

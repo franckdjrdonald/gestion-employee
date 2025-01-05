@@ -7,4 +7,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     boolean existedByName(String name);
 
     boolean existsByName(String name);
+
 }

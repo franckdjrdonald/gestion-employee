@@ -22,10 +22,7 @@
                 <td th:text="${employee.salary}"></td>
                 <td>
                     <a th:href="@{/employees/update/{id}(id=${employee.id})}">Modifier</a> |
-                    <a th:href="@{/employees/delete/{id}(id=${employee.id})}"
-                       th:onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet employé ?')">
-                        Supprimer
-                    </a>
+                    <a th:href="@{/employees/delete/{id}(id=${employee.id})}">Supprimer</a>
                 </td>
             </tr>
             </tbody>

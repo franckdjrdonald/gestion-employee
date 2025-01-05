@@ -2,9 +2,13 @@ package com.example.gestionemployee.controller;
 
 import com.example.gestionemployee.model.Employee;
 import com.example.gestionemployee.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/employees")
@@ -18,38 +22,71 @@ public class EmployeeController {
     @GetMapping
     public String listEmployees(Model model) {
         model.addAttribute("employees", employeeService.findAll());
-        return "employee/list";
+        return "employees/list";
     }
 
-    @GetMapping("/create")
+    @GetMapping("/employees/create")
     public String showCreateForm(Model model) {
         model.addAttribute("employee", new Employee());
-        return "employee/create";
+        return "employees/create";
     }
 
-    @PostMapping("/save")
-    public String saveEmployee(@ModelAttribute("employee") Employee employee, Model model) {
-        try {
-            employeeService.save(employee);
-            return "redirect:/employees";
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "employee/create";
+    @PostMapping("/employees/save")
+    public String saveEmployee(@Valid @ModelAttribute("employee") Employee employee,
+                               BindingResult result,
+                               Model model) {
+        // Vérifier les erreurs de validation
+        if (result.hasErrors()) {
+            return "employees/create";
         }
+
+        // Vérifier si le nom est unique
+        if (employeeService.existsByName(employee.getName())) {
+            model.addAttribute("nameError", "Le nom de l'employé doit être unique.");
+            return "employees/create";
+        }
+
+        // Sauvegarder l'employé
+        employeeService.save(employee);
+        return "redirect:/employees";
     }
 
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
-        Employee employee = employeeService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid employee ID: " + id));
+    // Afficher le formulaire de modification
+    @GetMapping("/employees/update/{id}")
+    public String showUpdateForm(@PathVariable("id") Long id, Model model) {
+        // Récupérer l'employé par ID
+        Optional<Employee> employee = employeeService.findById(id);
+        if (employee.isEmpty()) {
+            throw new IllegalArgumentException("Employé avec l'ID " + id + " introuvable.");
+        }
         model.addAttribute("employee", employee);
-        return "employee/edit";
+        return "employees/update";
+    }
+    @PostMapping("/employees/saveUpdate")
+    public String updateEmployee(@Valid @ModelAttribute("employee") Employee employee,
+                               BindingResult result,
+                               Model model) {
+        // Vérifier les erreurs de validation
+        if (result.hasErrors()) {
+            return "employees/create";
+        }
+
+        // Vérifier si le nom est unique
+        if (employeeService.existsByName(employee.getName())) {
+            model.addAttribute("nameError", "Le nom de l'employé doit être unique.");
+            return "employees/create";
+        }
+
+        // Sauvegarder l'employé
+        employeeService.save(employee);
+        return "redirect:/employees";
     }
 
     @GetMapping("/delete/{id}")
     public String showDeleteConfirmation(@PathVariable Long id, Model model) {
-        Employee employee = employeeService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid employee ID: " + id));
+        Employee employee = employeeService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid employees ID: " + id));
         model.addAttribute("employee", employee);
-        return "employee/delete";
+        return "employees/delete";
     }
 
     @PostMapping("/delete")

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:replace="principalLayout :: content">
+    <div th:fragment="content">
+        <h2>Liste des Employés</h2>
+        <table style="border: 1px solid black; border-collapse: collapse;">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Poste</th>
+                <th>Salaire</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employees}">
+                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.name}"></td>
+                <td th:text="${employee.position}"></td>
+                <td th:text="${employee.salary}"></td>
+                <td>
+                    <a th:href="@{/employees/update/{id}(id=${employee.id})}">Modifier</a> |
+                    <a th:href="@{/employees/delete/{id}(id=${employee.id})}"
+                       th:onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet employé ?')">
+                        Supprimer
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <a th:href="@{/employees/create}">Ajouter un Nouvel Employé</a>
+    </div>
+</div>
+</body>
+</html>

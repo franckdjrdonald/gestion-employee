@@ -2,6 +2,8 @@ package com.example.gestionemployee.service;
 
 import com.example.gestionemployee.model.Employee;
 import com.example.gestionemployee.repository.EmployeeRepository;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,14 +25,15 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
-    public void save(Employee employee) throws IllegalArgumentException {
-        if (employeeRepository.existedByName(employee.getName())) {
-            throw new IllegalArgumentException("Un employé avec ce nom existe déjà.");
-        }
+    public void save(Employee employee) {
         employeeRepository.save(employee);
     }
 
     public void deleteById(Long id) {
         employeeRepository.deleteById(id);
+    }
+
+    public boolean existsByName(String name) {
+        return employeeRepository.existsByName(name);
     }
 }

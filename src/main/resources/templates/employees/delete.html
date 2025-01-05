@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<div th:replace="principalLayout :: content">
+    <div th:fragment="content">
+        <h2>Supprimer un Employé</h2>
+        <p>Êtes-vous sûr de vouloir supprimer l'employé suivant ?</p>
+        <p><strong>Nom :</strong> <span th:text="${employee.name}"></span></p>
+        <p><strong>Poste :</strong> <span th:text="${employee.position}"></span></p>
+        <form th:action="@{/employees/delete}" method="post">
+            <input type="hidden" th:value="${employee.id}" name="id">
+            <button type="submit">Supprimer</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

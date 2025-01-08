@@ -20,6 +20,11 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
+    @GetMapping ("/")
+    public String showPrincipalmenu (){
+        return "employees/principalmenu";
+    }
+
     @GetMapping("/employees/create")
     public String showCreateForm(Model model) {
         model.addAttribute("employee", new Employee());

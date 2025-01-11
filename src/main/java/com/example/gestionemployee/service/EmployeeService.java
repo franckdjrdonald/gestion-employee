@@ -2,8 +2,6 @@ package com.example.gestionemployee.service;
 
 import com.example.gestionemployee.model.Employee;
 import com.example.gestionemployee.repository.EmployeeRepository;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

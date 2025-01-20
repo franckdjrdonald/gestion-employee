@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+<head th:replace="fragments/head :: head"></head>
 <body>
-<div th:replace="principalLayout :: content">
-    <div th:fragment="content">
+<header th:replace="fragments/header :: header"></header>
+<nav th:replace="fragments/nav :: nav"></nav>
+    <div>
         <h2>Supprimer un Employé</h2>
         <p>Êtes-vous sûr de vouloir supprimer l'employé suivant ?</p>
         <p><strong>Nom :</strong> <span th:text="${employee.name}"></span></p>
@@ -12,6 +14,6 @@
             <a th:href="@{/employees/list}">Annuler</a>
         </form>
     </div>
-</div>
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>

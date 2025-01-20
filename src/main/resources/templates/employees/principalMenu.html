@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<body th:replace="principalLayout :: content">
-<div th:fragment="content">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+<nav th:replace="fragments/nav :: nav"></nav>
+<div>
     <h2>Menu Principal</h2>
     <p>Bienvenue dans l'application de gestion des employés.</p>
     <ul>
@@ -9,5 +12,6 @@
         <li><a th:href="@{/employees/list}">Voir la Liste des Employés</a></li>
     </ul>
 </div>
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>

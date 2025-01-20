@@ -20,17 +20,23 @@ public class EmployeeController {
     }
 
     @GetMapping ("/")
-    public String showPrincipalmenu (){
-        return "employees/principalmenu";
+    public String showPrincipalmenu (Model model)
+    {
+        return "redirect:/index";
+    }
+    @GetMapping ("/home")
+    public String showHome (Model model)
+    {
+        return "/index";
     }
 
-    @GetMapping("/employees/create")
+    @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("employee", new Employee());
         return "employees/create";
     }
 
-    @PostMapping("/employees/save")
+    @PostMapping("/save")
     public String saveEmployee(@Valid @ModelAttribute("employee") Employee employee,
                                BindingResult result,
                                Model model) {
@@ -47,18 +53,18 @@ public class EmployeeController {
 
         // Sauvegarder l'employé
         employeeService.save(employee);
-        return "redirect:/employees";
+        return "redirect:/index";
     }
 
     //Afficher la page de modification
-    @GetMapping("/employees/update/{id}")
+    @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         Employee employee = employeeService.findById(id).get();
         model.addAttribute("employee", employee);
         return "employees/update";
     }
     //Enregistrer les modifications apportees
-    @PostMapping("/employees/saveUpdate")
+    @PostMapping("/saveUpdate")
     public String updateEmployee(@Valid @ModelAttribute("employee") Employee employee,
                                BindingResult result,
                                Model model) {
@@ -75,7 +81,7 @@ public class EmployeeController {
 
         // Sauvegarder l'employé
         employeeService.save(employee);
-        return "redirect:/employees";
+        return "redirect:/employees/list";
     }
 
     // Afficher la liste des employés
@@ -83,7 +89,7 @@ public class EmployeeController {
     public String listEmployees(Model model) {
         List<Employee> employees = employeeService.findAll();
         model.addAttribute("employees", employees);
-        return "employee/list";
+        return "employeeS/list";
     }
 
     @GetMapping("/delete/{id}")
@@ -96,6 +102,6 @@ public class EmployeeController {
     @PostMapping("/confirmDelete/{id}")
     public String deleteEmployee(@RequestParam Long id) {
         employeeService.deleteById(id);
-        return "redirect:/employees";
+        return "redirect:/employees/list";
     }
 }

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: head"></head>
+<head th:replace="~{fragments/head :: head}"></head>
 <body>
-<header th:replace="fragments/header :: header"></header>
-<nav th:replace="fragments/nav :: nav"></nav>
+<header th:replace="f~{ragments/header :: header}"></header>
+<nav th:replace="~{fragments/nav :: nav}"></nav>
 <div>
     <div>
         <h2>Ajouter un Employé</h2>
@@ -30,6 +30,6 @@
         </form>
     </div>
 </div>
-<footer th:replace="fragments/footer :: footer"></footer>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>

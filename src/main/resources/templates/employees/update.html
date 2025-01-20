@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<body th:replace="principalLayout :: content">
-<div th:fragment="content">
+<head th:replace="~{fragments/head :: head}"></head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+<nav th:replace="~{fragments/nav :: nav}"></nav>
+<div>
     <h2>Modifier les informations de l'employé</h2>
     <form th:action="@{/employees/update}" th:object="${employee}" method="post">
         <input type="hidden" th:field="*{id}" />
@@ -30,5 +33,6 @@
         </div>
     </form>
 </div>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>

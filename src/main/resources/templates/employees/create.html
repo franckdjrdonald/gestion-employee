@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head :: head}"></head>
 <body>
-<header th:replace="f~{ragments/header :: header}"></header>
+<header th:replace="~{fragments/header :: header}"></header>
 <nav th:replace="~{fragments/nav :: nav}"></nav>
 <div>
     <div>
@@ -16,13 +16,13 @@
 
             <div>
                 <label for="position">Poste :</label>
-                <input type="text" id="position" th:field="*{position}" required />
+                <input type="text" id="position" th:field="*{position}" />
                 <div th:if="${#fields.hasErrors('position')}" th:errors="*{position}"></div>
             </div>
 
             <div>
                 <label for="salary">Salaire :</label>
-                <input type="number" id="salary" th:field="*{salary}" required />
+                <input type="number" id="salary" th:field="*{salary}" />
                 <div th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></div>
             </div>
 

@@ -24,6 +24,7 @@ public class EmployeeController {
     {
         return "redirect:/index";
     }
+
     @GetMapping ("/home")
     public String showHome (Model model)
     {

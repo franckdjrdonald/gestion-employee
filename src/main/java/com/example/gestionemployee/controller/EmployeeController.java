@@ -19,11 +19,11 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping ("/")
-    public String showPrincipalmenu (Model model)
-    {
-        return "redirect:/index";
-    }
+//    @GetMapping ("/")
+//    public String showPrincipalmenu (Model model)
+//    {
+//        return "redirect:/index";
+//    }
 
     @GetMapping ("/home")
     public String showHome (Model model)

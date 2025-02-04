@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head :: head}"></head>
 <body>
-<header th:replace="f~{ragments/header :: header}"></header>
+<header th:replace="~{fragments/header :: header}"></header>
 <nav th:replace="~{fragments/nav :: nav}"></nav>
-<div th:replace="principalLayout :: content">
-    <div th:fragment="content">
+<div>
+    <div>
         <h2>Liste des Employés</h2>
         <table style="border: 1px solid black; border-collapse: collapse;">
             <thead>

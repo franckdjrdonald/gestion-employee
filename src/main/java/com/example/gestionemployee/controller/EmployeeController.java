@@ -55,7 +55,11 @@ public class EmployeeController {
     //Afficher la page de modification
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
-        Employee employee = employeeService.findById(id).get();
+        Optional<Employee> employee = employeeService.findById(id);
+        if (employee.isPresent()) {
+            model.addAttribute("employee", employee.get());
+            return "employees/list";
+        }
         model.addAttribute("employee", employee);
         return "employees/update";
     }

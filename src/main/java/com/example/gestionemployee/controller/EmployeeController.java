@@ -58,24 +58,22 @@ public class EmployeeController {
         Optional<Employee> employee = employeeService.findById(id);
         if (employee.isPresent()) {
             model.addAttribute("employee", employee.get());
-            return "employees/list";
         }
-        model.addAttribute("employee", employee);
         return "employees/update";
     }
     //Enregistrer les modifications apportees
     @PostMapping("/saveUpdate")
     public String updateEmployee(@Valid @ModelAttribute("employee") Employee employee,
-                               BindingResult result,
-                               Model model) {
+                                 BindingResult result,
+                                 Model model) {
         // Vérifier les erreurs de validation
         if (result.hasErrors()) {
-            return "employees/create";
+            return "employees/update";
         }
 
         // Sauvegarder l'employé
         employeeService.save(employee);
-        return "redirect:/employees/list";
+        return "/employees/update";
     }
 
     // Afficher la liste des employés

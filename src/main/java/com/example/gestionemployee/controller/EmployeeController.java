@@ -46,12 +46,6 @@ public class EmployeeController {
             return "employees/create";
         }
 
-        // Vérifier si le nom est unique
-        if (employeeService.existsByName(employee.getName())) {
-            model.addAttribute("nameError", "Le nom de l'employé doit être unique.");
-            return "employees/create";
-        }
-
         // Sauvegarder l'employé
         employeeService.save(employee);
         return "redirect:/index";
@@ -71,12 +65,6 @@ public class EmployeeController {
                                Model model) {
         // Vérifier les erreurs de validation
         if (result.hasErrors()) {
-            return "employees/create";
-        }
-
-        // Vérifier si le nom est unique
-        if (employeeService.existsByName(employee.getName())) {
-            model.addAttribute("nameError", "Le nom de l'employé doit être unique.");
             return "employees/create";
         }
 

@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/employees")
@@ -48,7 +49,7 @@ public class EmployeeController {
 
         // Sauvegarder l'employé
         employeeService.save(employee);
-        return "redirect:/index";
+        return "/index";
     }
 
     //Afficher la page de modification
@@ -78,14 +79,19 @@ public class EmployeeController {
     public String listEmployees(Model model) {
         List<Employee> employees = employeeService.findAll();
         model.addAttribute("employees", employees);
-        return "employeeS/list";
+        return "employees/list";
     }
 
     @GetMapping("/delete/{id}")
     public String showDeleteConfirmation(@PathVariable Long id, Model model) {
-        Employee employee = employeeService.findById(id).get();
-        model.addAttribute("employee", employee);
-        return "employees/delete";
+
+        Optional<Employee> employee = employeeService.findById(id);
+        if (employee.isPresent()) {
+            model.addAttribute("employee", employee.get());
+            return "employees/delete";
+        }
+
+        return "redirect:/employees/list";
     }
 
     @PostMapping("/confirmDelete/{id}")

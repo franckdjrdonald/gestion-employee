@@ -66,14 +66,9 @@ public class EmployeeController {
     public String updateEmployee(@Valid @ModelAttribute("employee") Employee employee,
                                  BindingResult result,
                                  Model model) {
-        // Vérifier les erreurs de validation
-        if (result.hasErrors()) {
-            return "employees/update";
-        }
-
         // Sauvegarder l'employé
         employeeService.save(employee);
-        return "/employees/update";
+        return "/index";
     }
 
     // Afficher la liste des employés

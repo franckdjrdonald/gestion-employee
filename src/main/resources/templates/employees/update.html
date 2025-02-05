@@ -6,7 +6,7 @@
 <nav th:replace="~{fragments/nav :: nav}"></nav>
 <div>
     <h2>Modifier les informations de l'employé</h2>
-    <form th:action="@{/employees/update}" th:object="${employee}" method="post">
+    <form th:action="@{/employees/saveUpdate}" th:object="${employee}" method="post">
         <input type="hidden" th:field="*{id}" />
 
         <div>

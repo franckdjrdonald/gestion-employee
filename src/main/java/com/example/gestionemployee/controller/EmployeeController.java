@@ -20,11 +20,11 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-//    @GetMapping ("/")
-//    public String showPrincipalmenu (Model model)
-//    {
-//        return "redirect:/index";
-//    }
+    @GetMapping ("/")
+    public String showPrincipalmenu (Model model)
+    {
+        return "redirect:/index";
+    }
 
     @GetMapping ("/home")
     public String showHome (Model model)
@@ -33,7 +33,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/create")
-    public String showCreateForm(Model model) {
+    public String showCreateForm(Model model, @ModelAttribute("employee") Employee employee) {
         model.addAttribute("employee", new Employee());
         return "employees/create";
     }

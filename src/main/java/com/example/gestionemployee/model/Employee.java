@@ -16,15 +16,15 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotBlank(message = "Le nom ne peut pas être vide.")
-//    @Size(min = 3, max = 50, message = "Le nom doit contenir entre 3 et 50 caractères.")
+    @NotBlank(message = "Le nom est obligatoire!")
+    @Size(min = 3, max = 50, message = "Le nom doit contenir entre 3 et 50 caractères!")
     private String name;
 
-//    @NotBlank(message = "Le poste est obligatoire.")
+    @NotBlank(message = "Le poste est obligatoire!")
     private String position;
 
-//    @NotNull(message = "Le salaire est obligatoire.")
-//    @DecimalMin(value = "0.0", inclusive = false, message = "Le salaire doit être supérieur à 0.")
+    @NotNull(message = "Le salaire est obligatoire!")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Le salaire doit être supérieur à 0")
     private double salary;
 
     public Employee() {

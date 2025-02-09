@@ -22,7 +22,7 @@
 
             <div>
                 <label for="salary">Salaire :</label>
-                <input type="number" id="salary" th:field="*{salary}" />
+                <input type="number" id="salary" th:field="*{salary}" step="any"  />
                 <div th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></div>
             </div>
 

@@ -24,7 +24,7 @@ public class Employee {
     private String position;
 
     @NotNull(message = "Le salaire est obligatoire!")
-    @DecimalMin(value = "0.0", inclusive = false, message = "Le salaire doit être supérieur à 0")
+//    @DecimalMin(value = "0.0", inclusive = false, message = "Le salaire doit être supérieur à 0")
     private double salary;
 
     public Employee() {

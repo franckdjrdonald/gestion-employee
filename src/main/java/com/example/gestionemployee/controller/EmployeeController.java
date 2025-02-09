@@ -44,6 +44,7 @@ public class EmployeeController {
                                Model model) {
         // Vérifier les erreurs de validation
         if (result.hasErrors()) {
+            employee.setSalary(0.0);
             return "employees/create";
         }
 

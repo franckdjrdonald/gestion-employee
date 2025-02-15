@@ -28,6 +28,17 @@
         </div>
 
         <div>
+            <label for="department">Département :</label>
+            <select id="department" th:field="*{department.id}">
+                <option th:each="department : ${departments}"
+                        th:value="${department.id}"
+                        th:text="${department.name}"
+                        th:selected="${department.id == department.id}">
+                </option>
+            </select>
+        </div>
+
+        <div>
             <button type="submit">Enregistrer</button>
             <a th:href="@{/employees/list}">Annuler</a>
         </div>

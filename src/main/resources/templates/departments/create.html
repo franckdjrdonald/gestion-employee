@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head}"></head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+<nav th:replace="~{fragments/nav :: nav}"></nav>
+<div>
+    <div>
+        <h2>Ajouter un departement</h2>
+        <form th:action="@{/departments/save}" th:object="${department}" method="post">
+            <div>
+                <label for="name">Nom :</label>
+                <input type="text" id="name" th:field="*{name}" />
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            </div>
+            <button type="submit">Créer</button>
+        </form>
+    </div>
+</div>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

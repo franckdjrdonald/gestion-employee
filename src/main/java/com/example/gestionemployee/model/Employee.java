@@ -1,9 +1,6 @@
 package com.example.gestionemployee.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
@@ -24,17 +21,21 @@ public class Employee {
     private String position;
 
     @NotNull(message = "Le salaire est obligatoire!")
-//    @DecimalMin(value = "0.0", inclusive = false, message = "Le salaire doit être supérieur à 0")
     private double salary;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false)
+    private Department department;
 
     public Employee() {
     }
 
-    public Employee(Long id, String name, String position, double salary) {
+    public Employee(Long id, String name, String position, double salary, Department department) {
         this.id = id;
         this.name = name;
         this.position = position;
         this.salary = salary;
+        this.department = department;
     }
 
     public Long getId() {
@@ -69,13 +70,11 @@ public class Employee {
         this.salary = salary;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", position='" + position + '\'' +
-                ", salary=" + salary +
-                '}';
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

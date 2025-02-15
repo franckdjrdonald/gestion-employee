@@ -14,6 +14,7 @@
                 <th>Nom</th>
                 <th>Poste</th>
                 <th>Salaire</th>
+                <th>Département</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -23,6 +24,7 @@
                 <td th:text="${employee.name}"></td>
                 <td th:text="${employee.position}"></td>
                 <td th:text="${employee.salary}"></td>
+                <td th:text="${employee.department.name}"></td>
                 <td>
                     <a th:href="@{/employees/update/{id}(id=${employee.id})}">Modifier</a> |
                     <a th:href="@{/employees/delete/{id}(id=${employee.id})}">Supprimer</a>

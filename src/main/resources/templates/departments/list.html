@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head}"></head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+<nav th:replace="~{fragments/nav :: nav}"></nav>
+<div>
+    <div>
+        <h2>Liste des departement</h2>
+        <table style="border: 1px solid black; border-collapse: collapse;">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="department : ${departments}">
+                <td th:text="${department.id}"></td>
+                <td th:text="${department.name}"></td>
+                <td>
+                    <a th:href="@{/departments/update/{id}(id=${department.id})}">Modifier</a> |
+                    <a th:href="@{/departments/delete/{id}(id=${department.id})}">Supprimer</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <a th:href="@{/departments/create}">Ajouter un nouveau departement</a>
+    </div>
+</div>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

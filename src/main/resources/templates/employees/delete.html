@@ -8,6 +8,7 @@
         <p>Êtes-vous sûr de vouloir supprimer l'employé suivant ?</p>
         <p><strong>Nom :</strong> <span th:text="${employee.name}"></span></p>
         <p><strong>Poste :</strong> <span th:text="${employee.position}"></span></p>
+        <p><strong>Departement :</strong> <span th:text="${employee.department.name}"></span></p>
         <form th:action="@{/employees/confirmDelete/{id}(id=${employee.id})}" method="post">
             <input type="hidden" th:value="${employee.id}" name="id">
             <button type="submit">Supprimer</button>

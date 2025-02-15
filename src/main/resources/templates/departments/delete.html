@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<head th:replace="~{fragments/head :: head}"></head>
+<body>
+<header th:replace="~{fragments/header :: header}"></header>
+<nav th:replace="~{fragments/nav :: nav}"></nav>
+    <div>
+        <h2>Supprimer un departement</h2>
+        <p>Êtes-vous sûr de vouloir supprimer le departement  suivant ?</p>
+        <p><strong>Nom :</strong> <span th:text="${department.name}"></span></p>
+        <form th:action="@{/departments/confirmDelete/{id}(id=${departement.id})}" method="post">
+            <input type="hidden" th:value="${departement.id}" name="id">
+            <button type="submit">Supprimer</button>
+            <a th:href="@{/departments/list}">Annuler</a>
+        </form>
+    </div>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

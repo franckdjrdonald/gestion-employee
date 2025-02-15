@@ -25,6 +25,16 @@
                 <input type="number" id="salary" th:field="*{salary}" step="any"  />
                 <div th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></div>
             </div>
+            <div>
+                <label for="department">Département :</label>
+                <select id="department" th:field="*{department.id}">
+                    <option th:each="dept : ${departments}"
+                            th:value="${dept.id}"
+                            th:text="${dept.name}"
+                            th:selected="${dept.id == 1}">
+                    </option>
+                </select>
+            </div>
 
             <button type="submit">Créer</button>
         </form>

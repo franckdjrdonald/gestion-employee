@@ -1,6 +1,8 @@
 package com.example.gestionemployee.controller;
 
+import com.example.gestionemployee.model.Department;
 import com.example.gestionemployee.model.Employee;
+import com.example.gestionemployee.service.DepartmentService;
 import com.example.gestionemployee.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -15,9 +17,11 @@ import java.util.Optional;
 @RequestMapping("/employees")
 public class EmployeeController {
     private final EmployeeService employeeService;
+    private final DepartmentService departmentService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, DepartmentService departmentService) {
         this.employeeService = employeeService;
+        this.departmentService = departmentService;
     }
 
     @GetMapping ("/")
@@ -35,6 +39,7 @@ public class EmployeeController {
     @GetMapping("/create")
     public String showCreateForm(Model model, @ModelAttribute("employee") Employee employee) {
         model.addAttribute("employee", new Employee());
+        model.addAttribute("departments", departmentService.findAll());
         return "employees/create";
     }
 
@@ -57,8 +62,10 @@ public class EmployeeController {
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         Optional<Employee> employee = employeeService.findById(id);
+        List<Department> departments = departmentService.findAll();
         if (employee.isPresent()) {
             model.addAttribute("employee", employee.get());
+            model.addAttribute("departments", departments);
         }
         return "employees/update";
     }

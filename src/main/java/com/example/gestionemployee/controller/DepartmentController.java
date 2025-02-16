@@ -78,4 +78,10 @@ public class DepartmentController {
         }
         return "/departments/list";
     }
+    //Confirmer la suppression du departement
+    @PostMapping("/confirmDelete/{id}")
+    public String deleteDeparment(@RequestParam Long id) {
+        departmentService.deleteById(id);
+        return "redirect:/departments/list";
+    }
 }

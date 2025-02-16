@@ -20,8 +20,7 @@
                 <td th:text="${department.id}"></td>
                 <td th:text="${department.name}"></td>
                 <td>
-                    <a th:href="@{/departments/update/{id}(id=${department.id})}">Modifier</a> |
-                    <a th:href="@{/departments/delete/{id}(id=${department.id})}">Supprimer</a>
+                    <a th:href="@{/departments/update/{id}(id=${department.id})}">Modifier</a> <a th:href="@{/departments/delete/{id}(id=${department.id})}">Supprimer</a>
                 </td>
             </tr>
             </tbody>

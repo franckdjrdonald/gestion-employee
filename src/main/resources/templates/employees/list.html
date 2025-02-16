@@ -26,8 +26,7 @@
                 <td th:text="${employee.salary}"></td>
                 <td th:text="${employee.department.name}"></td>
                 <td>
-                    <a th:href="@{/employees/update/{id}(id=${employee.id})}">Modifier</a> |
-                    <a th:href="@{/employees/delete/{id}(id=${employee.id})}">Supprimer</a>
+                    <a th:href="@{/employees/update/{id}(id=${employee.id})}">Modifier</a> <a th:href="@{/employees/delete/{id}(id=${employee.id})}">Supprimer</a>
                 </td>
             </tr>
             </tbody>

@@ -7,11 +7,12 @@
         <h2>Supprimer un departement</h2>
         <p>Êtes-vous sûr de vouloir supprimer le departement  suivant ?</p>
         <p><strong>Nom :</strong> <span th:text="${department.name}"></span></p>
-        <form th:action="@{/departments/confirmDelete/{id}(id=${departement.id})}" method="post">
-            <input type="hidden" th:value="${departement.id}" name="id">
+        <form th:action="@{/departments/confirmDelete/{id}(id=${department.id})}" method="post">
+            <input type="hidden" th:value="${department.id}" name="id">
             <button type="submit">Supprimer</button>
             <a th:href="@{/departments/list}">Annuler</a>
         </form>
+
     </div>
 <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>

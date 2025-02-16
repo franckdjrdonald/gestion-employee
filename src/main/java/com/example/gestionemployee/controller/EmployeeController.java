@@ -49,13 +49,15 @@ public class EmployeeController {
                                Model model) {
         // Vérifier les erreurs de validation
         if (result.hasErrors()) {
+            List<Department> departments = departmentService.findAll();
+            model.addAttribute("departments", departments);
             employee.setSalary(0.0);
             return "employees/create";
         }
 
         // Sauvegarder l'employé
         employeeService.save(employee);
-        return "/index";
+        return "/employees/list";
     }
 
     //Afficher la page de modification
@@ -74,9 +76,17 @@ public class EmployeeController {
     public String updateEmployee(@Valid @ModelAttribute("employee") Employee employee,
                                  BindingResult result,
                                  Model model) {
+        // Vérifier les erreurs de validation
+        if (result.hasErrors()) {
+            List<Department> departments = departmentService.findAll();
+            model.addAttribute("departments", departments);
+            employee.setSalary(0.0);
+            return "employees/update";
+        }
+
         // Sauvegarder l'employé
         employeeService.save(employee);
-        return "/index";
+        return "/employees/list";
     }
 
     // Afficher la liste des employés

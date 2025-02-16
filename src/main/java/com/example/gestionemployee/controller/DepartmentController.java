@@ -39,7 +39,7 @@ public class DepartmentController {
 
         // Sauvegarder le department
         departmentService.save(department);
-        return "/index";
+        return "/departments/list";
     }
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
@@ -48,16 +48,22 @@ public class DepartmentController {
             model.addAttribute("department", department.get());
             return "/departments/update";
         }
-        return "/index";
+        return "/departments/list";
     }
     //Enregistrer les modifications apportees
     @PostMapping("/saveUpdate")
     public String updateDepartment(@Valid @ModelAttribute("department") Department department,
-                                 BindingResult result,
-                                 Model model) {
-        // Sauvegarder l'employé
+                                   BindingResult result,
+                                   org.springframework.ui.Model model) {
+        // Vérifier les erreurs de validation
+        if (result.hasErrors()) {
+            model.addAttribute("department", new Department());
+            return "/departments/create";
+        }
+
+        // Sauvegarder le department
         departmentService.save(department);
-        return "/index";
+        return "/departments/list";
     }
 
     // Afficher la liste des departements

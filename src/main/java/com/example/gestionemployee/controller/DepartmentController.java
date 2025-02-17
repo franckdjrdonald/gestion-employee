@@ -39,7 +39,7 @@ public class DepartmentController {
 
         // Sauvegarder le department
         departmentService.save(department);
-        return "/departments/list";
+        return "/index";
     }
     @GetMapping("/update/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
@@ -63,12 +63,12 @@ public class DepartmentController {
 
         // Sauvegarder le department
         departmentService.save(department);
-        return "/departments/list";
+        return "/index";
     }
 
     // Afficher la liste des departements
     @GetMapping("/list")
-    public String listEmployees(Model model) {
+    public String showdepartmentList(Model model) {
         List<Department> departments = departmentService.findAll();
         model.addAttribute("departments", departments);
         return "/departments/list";

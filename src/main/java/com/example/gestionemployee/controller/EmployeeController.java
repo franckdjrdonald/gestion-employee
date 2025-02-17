@@ -57,7 +57,7 @@ public class EmployeeController {
 
         // Sauvegarder l'employé
         employeeService.save(employee);
-        return "/employees/list";
+        return "/index";
     }
 
     //Afficher la page de modification
@@ -86,7 +86,7 @@ public class EmployeeController {
 
         // Sauvegarder l'employé
         employeeService.save(employee);
-        return "/employees/list";
+        return "/index";
     }
 
     // Afficher la liste des employés
@@ -112,6 +112,6 @@ public class EmployeeController {
     @PostMapping("/confirmDelete/{id}")
     public String deleteEmployee(@RequestParam Long id) {
         employeeService.deleteById(id);
-        return "redirect:/employees/list";
+        return "/index";
     }
 }
